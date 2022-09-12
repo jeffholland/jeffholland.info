@@ -1,0 +1,132 @@
+body {
+  background-image: url("./images/bg.jpg");
+  background-color: #cccccc;
+  color: #00DBE6;
+  padding: 10spx;
+  font-size: 18px;
+  font-family: 'Playfair Display';
+}
+
+table.work-exp {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td.work-exp, th.work-exp {
+  border: 1px solid #00DBE6;
+  padding: 8px;
+}
+
+a {
+  color: #00DBE6;
+}
+
+a.nav-link {
+  font-size: 30px;
+  font-family: 'Rampart One';
+  text-decoration: none;
+  color: #710FD9;
+  background-color: #00DBE6;
+  padding: 10px;
+  border: 2px solid #710FD9;
+  border-radius: 10px;
+}
+
+hr{
+  height: 3px;
+  background-color: #00DBE6;
+  border: none;
+}
+
+@font-face {
+    font-family: 'Rampart One';
+    src: url('fonts/RampartOne-regular.ttf');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('fonts/PlayfairDisplay-Regular.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('fonts/PlayfairDisplay-Bold.ttf') format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('fonts/PlayfairDisplay-Italic.ttf') format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+h1 {
+    color: #710FD9;
+    font-size: 96px;
+    font-family: 'Rampart One';
+    border: 5px solid #710FD9;
+    border-radius: 20px;
+    padding: 40px;
+    margin: auto;
+    width: fit-content;
+    background-color: #00DBE6;
+}
+
+h3 {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+div.bio {
+  border: 3px solid #00DBE6;
+  border-radius: 20px;
+  border-radius: 10px;
+  padding: 10px;
+  margin: auto;
+  width: 50%;
+  line-height: 1.6;
+  background-color: #710FD9;
+}
+
+p.bio-text {
+  padding: 10px;
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+div.work-exp {
+  border: 3px solid #00DBE6;
+  border-radius: 20px;
+  border-radius: 10px;
+  padding: 10px;
+  margin: auto;
+  width: 50%;
+  line-height: 1.6;
+  background-color: #710FD9;
+}
+
+div.education {
+  border: 3px solid #00DBE6;
+  border-radius: 20px;
+  border-radius: 10px;
+  padding: 10px;
+  margin: auto;
+  width: 50%;
+  line-height: 1.6;
+  background-color: #710FD9;
+}
+
+div.contact-form-wrapper {
+  border: 3px solid #00DBE6;
+  border-radius: 20px;
+  border-radius: 10px;
+  padding: 10px;
+  margin: auto;
+  width: 50%;
+  line-height: 1.6;
+  background-color: #710FD9;
+}
