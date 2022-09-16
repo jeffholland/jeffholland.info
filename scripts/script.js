@@ -3,6 +3,7 @@ function myFunction() {
     const button = document.getElementById("myButton");
 
     header.innerHTML = "Did you seriously just click that button?";
+    header.style.color = "red";
     button.style.visibility = "hidden";
 
     console.log("Button clicked successfully");
