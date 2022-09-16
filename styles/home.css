@@ -1,5 +1,31 @@
+@font-face {
+  font-family: 'Rampart One';
+  src: url('../fonts/RampartOne-regular.ttf');
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('../fonts/PlayfairDisplay-Regular.ttf') format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('../fonts/PlayfairDisplay-Bold.ttf') format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('../fonts/PlayfairDisplay-Italic.ttf') format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
 body {
-  background-image: url("./images/bg.jpg");
+  background-image: url("../images/bg.jpg");
   background-color: #cccccc;
   color: #00DBE6;
   padding: 10spx;
@@ -36,32 +62,6 @@ hr{
   height: 3px;
   background-color: #00DBE6;
   border: none;
-}
-
-@font-face {
-    font-family: 'Rampart One';
-    src: url('fonts/RampartOne-regular.ttf');
-}
-
-@font-face {
-  font-family: 'Playfair Display';
-  src: url('fonts/PlayfairDisplay-Regular.ttf') format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Playfair Display';
-  src: url('fonts/PlayfairDisplay-Bold.ttf') format("truetype");
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Playfair Display';
-  src: url('fonts/PlayfairDisplay-Italic.ttf') format("truetype");
-  font-weight: normal;
-  font-style: italic;
 }
 
 h1 {
