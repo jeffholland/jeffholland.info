@@ -44,6 +44,7 @@
 
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
+console.log(typeof ctx);
 var width;
 var height;
 
@@ -56,7 +57,7 @@ var resize = function() {
 window.onresize = resize;
 resize();
 
-ctx.fillStyle("green");
+ctx.fillStyle = "green";
 
 var state = {
     x: (width / 2),
