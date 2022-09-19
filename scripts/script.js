@@ -8,3 +8,11 @@ function myFunction() {
 
     console.log("Button clicked successfully");
 }
+
+function randomNumber() {
+    const result = document.getElementById("rnd-result");
+    num = Math.floor(Math.random() * 100);
+
+    result.innerHTML = num.toString();
+}
+
