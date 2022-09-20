@@ -1,52 +1,15 @@
-// const speed = 20;
+// GAME LOOP / ANIMATION LOOP CODE
 
-// window.addEventListener("keydown", function (event) {
-//     if (event.defaultPrevented) {
-//         return;
-//     }
-
-//     // Get snake and its rectangle
-//     const snake = document.getElementById("snake");
-//     const rect = snake.getBoundingClientRect();
-
-//     // Modify position with arrow keys
-//     switch (event.key) {
-//         case "ArrowDown":
-//             if (rect.bottom >= this.screen.height) {
-//                 return;
-//             }
-//             snake.style.top = String(rect.top + speed) + "px";
-//             break;
-//         case "ArrowUp":
-//             if (rect.top <= 0) {
-//                 return;
-//             }
-//             snake.style.top = String(rect.top - speed) + "px";
-//             break;
-//         case "ArrowLeft":
-//             if (rect.left <= 0) {
-//                 return;
-//             }
-//             snake.style.left = String(rect.left - speed) + "px";
-//             break;
-//         case "ArrowRight":
-//             if (rect.right >= this.screen.width) {
-//                 return;
-//             }
-//             snake.style.left = String(rect.left + speed) + "px";
-//             break;
-//     }
-// }, true);
-
-
-// The following code is taken and modified from:
+// The following code is based on:
 // https://www.sitepoint.com/quick-tip-game-loop-in-javascript/
 
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
-console.log(typeof ctx);
 var width;
 var height;
+
+const speed = 20;
+let direction = "up";
 
 var resize = function() {
   width = window.innerWidth * 2;
@@ -65,9 +28,32 @@ var state = {
 }
 
 function update(progress) {
-    state.x += progress;
+    switch (direction) {
+        case "up":
+            state.y = state.y - progress;
+            break;
+        case "down":
+            state.y += progress;
+            break;
+        case "left":
+            state.x = state.x - progress;
+            break;
+        case "right":
+            state.x += progress;
+            break;
+    }
+
     if (state.x > width) {
         state.x -= width;
+    }
+    if (state.x < 0) {
+        state.x += width;
+    }
+    if (state.y > height) {
+        state.y -= height;
+    }
+    if (state.y < 0) {
+        state.y += height;
     }
 }
 
@@ -89,3 +75,29 @@ function loop(timestamp) {
 
 var lastRender = 0;
 window.requestAnimationFrame(loop);
+
+
+// KEYBOARD INPUT CODE
+
+
+window.addEventListener("keydown", function (event) {
+    if (event.defaultPrevented) {
+        return;
+    }
+
+    // Modify position with arrow keys
+    switch (event.key) {
+        case "ArrowDown":
+            direction = "down";
+            break;
+        case "ArrowUp":
+            direction = "up";
+            break;
+        case "ArrowLeft":
+            direction = "left";
+            break;
+        case "ArrowRight":
+            direction = "right";
+            break;
+    }
+}, true);
