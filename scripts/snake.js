@@ -1,18 +1,23 @@
-// GAME LOOP / ANIMATION LOOP CODE
 
-// The following code is based on:
-// https://www.sitepoint.com/quick-tip-game-loop-in-javascript/
-
+// game canvas is the whole dang window
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var width;
 var height;
 
-const speed = 20;
+// direction variable 
+// (should probably be an enum but that seemed like a hassle)
 let direction = "up";
+
+// size of one "unit" of the green snake
+const snake_unit_size = 40;
 
 // yellow dots aka snake food
 let yellow_dots = [];
+// likelihood that they will spawn is one out of...
+const yellow_dot_spawn_chance = 100;
+// size
+const yellow_dot_size = 20;
 
 var resize = function() {
   width = window.innerWidth * 2;
@@ -64,7 +69,7 @@ function update(progress) {
     
 
     // Spawn yellow dots randomly
-    spawn_chance = Math.floor(Math.random() * 100);
+    spawn_chance = Math.floor(Math.random() * yellow_dot_spawn_chance);
     if (spawn_chance == 0) {
         x_coord = Math.floor(Math.random() * width);
         y_coord = Math.floor(Math.random() * height);
@@ -73,7 +78,6 @@ function update(progress) {
             x: x_coord,
             y: y_coord
         }
-        console.log("yellow dot create: (" + yellow_dot.x + ", " + yellow_dot.y + ")");
         yellow_dots.push( yellow_dot );
     }
 }
@@ -83,12 +87,12 @@ function draw() {
 
     // Draw the green dot (snake)
     ctx.fillStyle = "green";
-    ctx.fillRect(state.x - 10, state.y - 10, 20, 20);
+    ctx.fillRect(state.x - 10, state.y - 10, snake_unit_size, snake_unit_size);
 
     // Draw the yellow dots (snake food)
     ctx.fillStyle = "yellow";
     yellow_dots.forEach(dot => {
-        ctx.fillRect(dot.x, dot.y, 20, 20);
+        ctx.fillRect(dot.x, dot.y, yellow_dot_size, yellow_dot_size);
     })
 }
 
