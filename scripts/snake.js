@@ -11,6 +11,9 @@ var height;
 const speed = 20;
 let direction = "up";
 
+// yellow dots aka snake food
+let yellow_dots = [];
+
 var resize = function() {
   width = window.innerWidth * 2;
   height = window.innerHeight * 2;
@@ -20,28 +23,31 @@ var resize = function() {
 window.onresize = resize;
 resize();
 
-ctx.fillStyle = "green";
-
 var state = {
     x: (width / 2),
     y: (height / 2),
 }
 
 function update(progress) {
+
+    // Movement
+
     switch (direction) {
         case "up":
-            state.y = state.y - progress;
+            state.y -= progress;
             break;
         case "down":
             state.y += progress;
             break;
         case "left":
-            state.x = state.x - progress;
+            state.x -= progress;
             break;
         case "right":
             state.x += progress;
             break;
     }
+
+    // Set wall boundaries
 
     if (state.x > width) {
         state.x -= width;
@@ -55,12 +61,35 @@ function update(progress) {
     if (state.y < 0) {
         state.y += height;
     }
+    
+
+    // Spawn yellow dots randomly
+    spawn_chance = Math.floor(Math.random() * 100);
+    if (spawn_chance == 0) {
+        x_coord = Math.floor(Math.random() * width);
+        y_coord = Math.floor(Math.random() * height);
+
+        let yellow_dot = {
+            x: x_coord,
+            y: y_coord
+        }
+        console.log("yellow dot create: (" + yellow_dot.x + ", " + yellow_dot.y + ")");
+        yellow_dots.push( yellow_dot );
+    }
 }
 
 function draw() {
     ctx.clearRect(0, 0, width, height);
 
+    // Draw the green dot (snake)
+    ctx.fillStyle = "green";
     ctx.fillRect(state.x - 10, state.y - 10, 20, 20);
+
+    // Draw the yellow dots (snake food)
+    ctx.fillStyle = "yellow";
+    yellow_dots.forEach(dot => {
+        ctx.fillRect(dot.x, dot.y, 20, 20);
+    })
 }
 
 function loop(timestamp) {
