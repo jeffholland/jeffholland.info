@@ -40,7 +40,6 @@ function spawn_dots() {
 // collision function
 function collision(dot_count) {
     yellow_dots.splice(dot_count, 1);
-    console.log("Spliced at index " + dot_count);
 }
 
 // collision detection function
@@ -48,10 +47,10 @@ function detect_collisions() {
 
     for (let i = 0; i < yellow_dots.length; i++) {
 
-        if (Player.state.x >= yellow_dots[i].x 
-            && Player.state.x <= yellow_dots[i].x + (Player.size * 2)
-            && Player.state.y >= yellow_dots[i].y 
-            && Player.state.y < yellow_dots[i].y + (Player.size * 2)) {
+        if (Player.state.x >= yellow_dots[i].x - Player.size
+            && Player.state.x <= yellow_dots[i].x + Player.size
+            && Player.state.y >= yellow_dots[i].y - Player.size
+            && Player.state.y < yellow_dots[i].y + Player.size) {
                 
                 collision(i);
         }
