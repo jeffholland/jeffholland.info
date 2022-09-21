@@ -1,0 +1,71 @@
+//==============================================
+// game loop
+//==============================================
+
+function update(progress) {
+
+    // Move player according to direction
+    Player.move(progress);
+    
+    // Spawn yellow dots randomly
+    spawn_dots();
+
+    // Detect collisions
+    detect_collisions();
+}
+
+function draw() {
+    ctx.clearRect(0, 0, width, height);
+
+    // Draw the green dot (snake)
+    ctx.fillStyle = "green";
+    ctx.fillRect(Player.state.x - 10, Player.state.y - 10, Player.size, Player.size);
+
+    // Draw the yellow dots (snake food)
+    ctx.fillStyle = "yellow";
+    yellow_dots.forEach(dot => {
+        ctx.fillRect(dot.x, dot.y, yellow_dot_size, yellow_dot_size);
+    })
+}
+
+function loop(timestamp) {
+    var progress = timestamp - lastRender;
+
+    update(progress);
+    draw();
+
+    lastRender = timestamp;
+    window.requestAnimationFrame(loop);
+}
+
+var lastRender = 0;
+window.requestAnimationFrame(loop);
+
+
+
+
+//==============================================
+// keyboard input listener
+//==============================================
+
+window.addEventListener("keydown", function (event) {
+    if (event.defaultPrevented) {
+        return;
+    }
+
+    // Modify position with arrow keys
+    switch (event.key) {
+        case "ArrowDown":
+            Player.direction = "down";
+            break;
+        case "ArrowUp":
+            Player.direction = "up";
+            break;
+        case "ArrowLeft":
+            Player.direction = "left";
+            break;
+        case "ArrowRight":
+            Player.direction = "right";
+            break;
+    }
+}, true);
