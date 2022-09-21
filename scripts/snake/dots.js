@@ -40,6 +40,8 @@ function spawn_dots() {
 // collision function
 function collision(dot_count) {
     yellow_dots.splice(dot_count, 1);
+
+    Player.grow();
 }
 
 // collision detection function

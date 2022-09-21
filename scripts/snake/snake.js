@@ -17,9 +17,8 @@ function update(progress) {
 function draw() {
     ctx.clearRect(0, 0, width, height);
 
-    // Draw the green dot (snake)
-    ctx.fillStyle = "green";
-    ctx.fillRect(Player.state.x - 10, Player.state.y - 10, Player.size, Player.size);
+    // Draw the player (snake)
+    Player.draw(ctx);
 
     // Draw the yellow dots (snake food)
     ctx.fillStyle = "yellow";

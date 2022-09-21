@@ -14,6 +14,42 @@ const Player = {
     // lower speed is slower (1 is update speed which is very fast)
     speed: 0.5,
 
+    // how long is the snake in units (rectangles)
+    length: 1,
+
+    grow: function() {
+        this.length += 1;
+    },
+
+    draw: function(ctx) {
+        ctx.fillStyle = "green";
+        for (let i = 0; i < Player.length; i++) {
+            let x;
+            let y;
+
+            switch (this.direction) {
+                case "up":
+                    x = this.state.x;
+                    y = this.state.y + (i * this.size);
+                    break;
+                case "down":
+                    x = this.state.x;
+                    y = this.state.y - (i * this.size);
+                    break;
+                case "left":
+                    x = this.state.x + (i * this.size);
+                    y = this.state.y;
+                    break;
+                case "right":
+                    x = this.state.x - (i * this.size);
+                    y = this.state.y;
+                    break;
+            }
+
+            ctx.fillRect(x, y, Player.size, Player.size);
+        }
+    },
+
     move: function(progress) {
             switch (this.direction) {
                 case "up":
