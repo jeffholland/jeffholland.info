@@ -19,8 +19,15 @@ const yellow_dot_spawn_chance = 100;
 // size
 const yellow_dot_size = 20;
 
+// max num dots
+const max_num_dots = 5;
+
 // spawn function
 function spawn_dots() {
+    if (yellow_dots.length >= max_num_dots) {
+        return;
+    }
+
     spawn_chance = Math.floor(Math.random() * yellow_dot_spawn_chance);
     if (spawn_chance == 0) {
         const x_coord = Math.floor(Math.random() * width);
@@ -32,20 +39,22 @@ function spawn_dots() {
 
 // collision function
 function collision(dot_count) {
-    yellow_dots.pop(dot_count);
-    console.log("Popped at index " + dot_count);
+    yellow_dots.splice(dot_count, 1);
+    console.log("Spliced at index " + dot_count);
 }
 
 // collision detection function
 function detect_collisions() {
 
-    let dot_count = 0;
+    for (let i = 0; i < yellow_dots.length; i++) {
 
-    yellow_dots.forEach(dot => {
-        if (Player.state.x >= dot.x && Player.state.x < dot.x + yellow_dot_size 
-            && Player.state.y >= dot.y && Player.state.y < dot.y + yellow_dot_size) {
-                collision(dot_count);
+        if (Player.state.x >= yellow_dots[i].x 
+            && Player.state.x <= yellow_dots[i].x + (Player.size * 2)
+            && Player.state.y >= yellow_dots[i].y 
+            && Player.state.y < yellow_dots[i].y + (Player.size * 2)) {
+                
+                collision(i);
         }
-        dot_count += 1;
-    }) 
+
+    }
 }
