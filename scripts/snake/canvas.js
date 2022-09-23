@@ -15,4 +15,3 @@ var resize = function() {
 }
 window.onresize = resize;
 resize();
-

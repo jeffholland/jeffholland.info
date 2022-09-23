@@ -55,16 +55,16 @@ window.addEventListener("keydown", function (event) {
     // Modify position with arrow keys
     switch (event.key) {
         case "ArrowDown":
-            Player.direction = "down";
+            Player.change_direction("down");
             break;
         case "ArrowUp":
-            Player.direction = "up";
+            Player.change_direction("up");
             break;
         case "ArrowLeft":
-            Player.direction = "left";
+            Player.change_direction("left");
             break;
         case "ArrowRight":
-            Player.direction = "right";
+            Player.change_direction("right");
             break;
     }
 }, true);
