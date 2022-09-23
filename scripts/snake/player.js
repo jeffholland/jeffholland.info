@@ -22,13 +22,13 @@ const Player = {
     // bends: [],
     // bend_idx: 0,
 
-    add_bend: function(prev_direction) {
-        this.bends.push( new Bend(prev_direction, 0) );
-    },
+    // add_bend: function(prev_direction) {
+    //     this.bends.push( new Bend(prev_direction, 0) );
+    // },
 
-    remove_bend: function() {
-        this.bends.shift();
-    },
+    // remove_bend: function() {
+    //     this.bends.shift();
+    // },
 
     // lower speed is slower (1 is update speed which is very fast)
     speed: 0.5,
@@ -42,7 +42,7 @@ const Player = {
 
     change_direction: function(new_direction) {
         // Add bend to bends array with previous direction
-        this.add_bend(Player.direction);
+        // this.add_bend(Player.direction);
 
         Player.direction = new_direction;
     },
