@@ -1,14 +1,23 @@
+function Coord(x, y) {
+    this.x = x;
+    this.y = y;
+}
 
 //==============================================
 // green player aka snake
 //==============================================
 
 const Player = {
-    direction: "up",
+    // basic attributes
     size: 40,
-    state: {
-        x: (width / 2),
-        y: (height / 2)
+    direction: "up",
+    state: new Coord (width / 2, height / 2),
+
+    // bending the body of the snake
+    bends: [],
+
+    add_bend: function(x, y) {
+        this.bends.push(new Coord(x, y));
     },
 
     // lower speed is slower (1 is update speed which is very fast)
@@ -26,6 +35,10 @@ const Player = {
         for (let i = 0; i < Player.length; i++) {
             let x;
             let y;
+            let bend_idx = 0;
+
+            // need to figure out how to iterate through
+            // the bends array to draw bends...
 
             switch (this.direction) {
                 case "up":
