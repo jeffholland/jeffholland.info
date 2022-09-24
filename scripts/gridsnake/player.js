@@ -43,17 +43,19 @@ const Player = {
     progress_counter: 0,
 
     move: function(progress) {
+
         // Track progress to control pace of movement
-        // Rest of function only executes when counter goes over thresghold
         Player.progress_counter += progress;
         if (Player.progress_counter < Player.progress_threshold) {
             return;
         }
 
-        let current = Player.head;
-        let currentDirection = Player.direction;
+        // Rest of function only executes when progress_counter goes over threshold
         
         Player.progress_counter = 0;
+
+        let current = Player.head;
+        let currentDirection = Player.direction;
 
         // Iterate through nodes
         while (current != null) {
@@ -62,51 +64,64 @@ const Player = {
 
                 case "up":
                     current.coord.y -= gridSize;
-                    if (current.next != null) {
-                        if (current.next.coord.x > current.coord.x) {
-                            currentDirection = "right";
-                        } else if (current.next.coord.x < current.coord.x) {
-                            currentDirection = "left";
-                        }
-                    }
                     break;
 
                 case "down":
                     current.coord.y += gridSize;
-                    if (current.next != null) {
-                        if (current.next.coord.x > current.coord.x) {
-                            currentDirection = "left";
-                        } else if (current.next.coord.x < current.coord.x) {
-                            currentDirection = "right";
-                        }
-                    }
                     break;
 
                 case "left":
                     current.coord.x -= gridSize;
-                    if (current.next != null) {
-                        if (current.next.coord.x > current.coord.x) {
-                            currentDirection = "down";
-                        } else if (current.next.coord.x < current.coord.x) {
-                            currentDirection = "up";
-                        }
-                    }
                     break;
 
                 case "right":
                     current.coord.x += gridSize;
-                    if (current.next != null) {
-                        if (current.next.coord.x > current.coord.x) {
-                            currentDirection = "up";
-                        } else if (current.next.coord.x < current.coord.x) {
-                            currentDirection = "down";
-                        }
-                    }
                     break;
 
             }
 
+            if (current.next != null) {
+                this.moveChangeDirection(currentDirection);
+            }
+
             current = current.next;
+        }
+    },
+
+    moveChangeDirection: function(currentDirection) {
+        switch (currentDirection) {
+
+            case "up":
+                if (current.next.coord.x > current.coord.x) {
+                    currentDirection = "right";
+                } else if (current.next.coord.x < current.coord.x) {
+                    currentDirection = "left";
+                }
+                break;
+
+            case "down":
+                if (current.next.coord.x > current.coord.x) {
+                    currentDirection = "left";
+                } else if (current.next.coord.x < current.coord.x) {
+                    currentDirection = "right";
+                }
+                break;
+
+            case "left":
+                if (current.next.coord.x > current.coord.x) {
+                    currentDirection = "down";
+                } else if (current.next.coord.x < current.coord.x) {
+                    currentDirection = "up";
+                }
+                break;
+                
+            case "right":
+                if (current.next.coord.x > current.coord.x) {
+                    currentDirection = "up";
+                } else if (current.next.coord.x < current.coord.x) {
+                    currentDirection = "down";
+                }
+                break;
         }
     },
 

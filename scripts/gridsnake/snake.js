@@ -1,7 +1,7 @@
 function update(progress) {
     Player.move(progress);
 
-    // spawnDots();
+    spawnDots();
 
     // detectCollisions();
 }

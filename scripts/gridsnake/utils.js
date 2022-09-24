@@ -10,9 +10,9 @@ class Coord {
 
     // convert grid coordinate to screen coordinate
     convertToScreen() {
-        coord.x = coord.x * gridSize;
-        coord.y = coord.y * gridSize;
-        coord.screen = true;
+        this.x = this.x * gridSize;
+        this.y = this.y * gridSize;
+        this.screen = true;
     }
 
     // convert screen coordinate to grid coordinate

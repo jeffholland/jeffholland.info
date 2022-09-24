@@ -2,38 +2,38 @@
 // yellow dots aka snake food
 //==============================================
 
-// factory
-function createDot(x_coord, y_coord) {
-    return {
-        x: x_coord,
-        y: y_coord
-    }
-}
-
-// array
+// array of dots
 let dots = [];
 
 // likelihood that they will spawn is one out of...
-const yellow_dot_spawn_chance = 100;
-
-// size
-const yellow_dot_size = 20;
+const dotSpawnChance = 100;
 
 // max num dots
-const max_num_dots = 5;
+const maxDots = 5;
 
 // spawn function
 function spawnDots() {
-    if (dots.length >= max_num_dots) {
+    if (dots.length >= maxDots) {
         return;
     }
 
-    spawn_chance = Math.floor(Math.random() * yellow_dot_spawn_chance);
-    if (spawn_chance == 0) {
-        const x_coord = Math.floor(Math.random() * width);
-        const y_coord = Math.floor(Math.random() * height);
+    dotSpawnValue = Math.floor(Math.random() * dotSpawnChance);
+    if (dotSpawnValue == 0) {
+        const x = Math.floor(Math.random() * numVerticalLines);
+        const y = Math.floor(Math.random() * numHorizontalLines);
 
-        dots.push( createDot(x_coord, y_coord) );
+        dots.push( new Coord(x, y) );
+
+        if (debug) {
+            console.log("Spawned dot at " + x + ", " + y + " - grid values");
+        }
+
+        dots[dots.length - 1].convertToScreen();
+
+        if (debug) {
+            console.log("Converted dot to " + dots[dots.length - 1].x 
+                + ", " + dots[dots.length - 1].y + " - screen values");
+        }
     }
 }
 
@@ -52,13 +52,17 @@ function detectCollisions() {
         let current = Player.head;
 
         while (current != null) {
-            if (current.x >= dots[i].x - gridSize
-                && current.x <= dots[i].x + gridSize
-                && current.y >= dots[i].y - gridSize
-                && current.y <= dots[i].y + gridSize) {
+            if (current.coord.x >= dots[i].x - gridSize
+                && current.coord.x <= dots[i].x + gridSize
+                && current.coord.y >= dots[i].y - gridSize
+                && current.coord.y <= dots[i].y + gridSize) {
                     collision(i);
                 }
         }
 
     }
+}
+
+function drawDots(ctx) {
+    
 }
