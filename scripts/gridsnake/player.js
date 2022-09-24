@@ -37,9 +37,19 @@ const Player = {
         Player.tail = Player.tail.next;
     },
 
-    move: function() {
+    progress_threshold: 500,
+    progress_counter: 0,
+
+    move: function(progress) {
         let current = this.head;
         let currentDirection = this.direction;
+
+        Player.progress_counter += progress;
+        if (Player.progress_counter < Player.progress_threshold) {
+            return;
+        } else {
+            Player.progress_counter = 0;
+        }
 
         while (current != null) {
             switch (currentDirection) {
