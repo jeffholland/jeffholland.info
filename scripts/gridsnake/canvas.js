@@ -1,14 +1,17 @@
+// HTML graphic canvas and context
 const canvas = document.getElementById("canvas");
-
 const ctx = canvas.getContext("2d");
 
+// Constant value - size of grid
+const gridSize = 40;
+
+// Values to be calculated on resize
 let width;
 let height;
-
-const gridSize = 40;
 let numVerticalLines = Math.floor(width / gridSize);
 let numHorizontalLines = Math.floor(height / gridSize);
 
+// Resize function
 const resize = function() {
     width = window.innerWidth * 2;
     height = window.innerHeight * 2;
@@ -31,6 +34,8 @@ const resize = function() {
 window.onresize = resize;
 resize();
 
+
+// Draw grid function
 function drawGrid(ctx) {
     ctx.strokeStyle = "white";
 

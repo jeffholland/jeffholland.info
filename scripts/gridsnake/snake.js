@@ -7,6 +7,8 @@ function update(progress) {
 }
 
 function draw() {
+    ctx.clearRect(0, 0, width, height);
+
     drawGrid(ctx);
 
     Player.draw(ctx);

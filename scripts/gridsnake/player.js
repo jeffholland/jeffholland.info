@@ -1,17 +1,19 @@
 // Player is a linked list of nodes
+// containing a Coord (see utils.js) and a pointer to next node
 
 class Node {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
+    constructor(coord) {
+        this.coord = coord;
         this.next = null;
     }
 }
 
-const Player = {
-    direction: "up",
+// Player class contains pointers to head and tail nodes
 
-    head: new Node(0, 0),
+const Player = {
+    direction: "down",
+
+    head: new Node(new Coord(0, 0)),
     tail: this.head,
 
     growSnake: function() {
@@ -41,58 +43,62 @@ const Player = {
     progress_counter: 0,
 
     move: function(progress) {
-        let current = this.head;
-        let currentDirection = this.direction;
-
+        // Track progress to control pace of movement
+        // Rest of function only executes when counter goes over thresghold
         Player.progress_counter += progress;
         if (Player.progress_counter < Player.progress_threshold) {
             return;
-        } else {
-            Player.progress_counter = 0;
         }
 
+        let current = Player.head;
+        let currentDirection = Player.direction;
+        
+        Player.progress_counter = 0;
+
+        // Iterate through nodes
         while (current != null) {
+
             switch (currentDirection) {
 
                 case "up":
-                    current.y -= gridSize;
+                    current.coord.y -= gridSize;
                     if (current.next != null) {
-                        if (current.next.x > current.x) {
+                        if (current.next.coord.x > current.coord.x) {
                             currentDirection = "right";
-                        } else if (current.next.x < current.x) {
+                        } else if (current.next.coord.x < current.coord.x) {
                             currentDirection = "left";
                         }
                     }
                     break;
 
                 case "down":
-                    current.y += gridSize;
+                    current.coord.y += gridSize;
                     if (current.next != null) {
-                        if (current.next.x > current.x) {
+                        if (current.next.coord.x > current.coord.x) {
                             currentDirection = "left";
-                        } else if (current.next.x < current.x) {
+                        } else if (current.next.coord.x < current.coord.x) {
                             currentDirection = "right";
                         }
                     }
                     break;
 
                 case "left":
-                    current.x -= gridSize;
+                    current.coord.x -= gridSize;
                     if (current.next != null) {
-                        if (current.next.x > current.x) {
+                        if (current.next.coord.x > current.coord.x) {
                             currentDirection = "down";
-                        } else if (current.next.x < current.x) {
+                        } else if (current.next.coord.x < current.coord.x) {
                             currentDirection = "up";
                         }
                     }
                     break;
 
                 case "right":
-                    current.x += gridSize;
+                    current.coord.x += gridSize;
                     if (current.next != null) {
-                        if (current.next.x > current.x) {
+                        if (current.next.coord.x > current.coord.x) {
                             currentDirection = "up";
-                        } else if (current.next.x < current.x) {
+                        } else if (current.next.coord.x < current.coord.x) {
                             currentDirection = "down";
                         }
                     }
@@ -105,40 +111,19 @@ const Player = {
     },
 
     draw: function(ctx) {
-
         ctx.fillStyle = "green";
 
-        let current = this.head;
+        let current = Player.head;
 
         while (current != null) {
-            ctx.fillRect(current.x, current.y, gridSize, gridSize);
-            console.log("Drawing node at " + current.x + ", " + current.y);
+            ctx.fillRect(current.coord.x, current.coord.y, gridSize, gridSize);
+
+            if (debug) {
+                console.log("Drawing node at " + current.coord.x + ", " + current.coord.y);
+            }
+
             current = current.next;
         }
-    }
+    },
 
 } 
-
-
-
-
-
-// const a = new Node(0, 0);
-// const b = new Node(1, 0);
-// const c = new Node(2, 0);
-// const d = new Node(3, 0);
-
-// a.next = b;
-// b.next = c;
-// c.next = d;
-
-// const printLinkedList = (head) => {
-//     let current = head;
-
-//     while (current != null) {
-//         console.log("Coordinate: " + current.x + ", " + current.y);
-//         current = current.next;
-//     }
-// };
-
-// printLinkedList(a);
