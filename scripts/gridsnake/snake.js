@@ -1,6 +1,3 @@
-const numVerticalLines = Math.floor(width / gridSize);
-const numHorizontalLines = Math.floor(height / gridSize);
-
 function update(progress) {
     Player.move(progress);
 

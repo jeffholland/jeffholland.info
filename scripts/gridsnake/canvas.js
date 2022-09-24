@@ -6,12 +6,27 @@ let width;
 let height;
 
 const gridSize = 40;
+let numVerticalLines = Math.floor(width / gridSize);
+let numHorizontalLines = Math.floor(height / gridSize);
 
 const resize = function() {
     width = window.innerWidth * 2;
     height = window.innerHeight * 2;
     canvas.width = width;
     canvas.height = height;
+
+    numVerticalLines = Math.floor(width / gridSize);
+    numHorizontalLines = Math.floor(height / gridSize);
+
+    // debug
+    if (debug) {
+        console.log("~~~ Resized ~~~");
+        console.log("Canvas width: " + width);
+        console.log("Canvas height: " + height);
+        console.log("Grid size: " + gridSize);
+        console.log("Num vertical lines: " + numVerticalLines);
+        console.log("Num horizontal lines: " + numHorizontalLines);
+    }
 }
 window.onresize = resize;
 resize();
