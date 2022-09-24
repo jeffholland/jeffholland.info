@@ -64,5 +64,12 @@ function detectCollisions() {
 }
 
 function drawDots(ctx) {
-    
+    ctx.fillStyle = "yellow";
+
+    for (let i = 0; i < dots.length; ++i) {
+        ctx.fillRect(dots[i].x, dots[i].y, gridSize, gridSize);
+        if (debug) {
+            console.log("Drew dot at " + dots[i].x + ", " + dots[i].y);
+        }
+    }
 }

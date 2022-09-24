@@ -35,7 +35,7 @@ const Player = {
                 break;
         }
 
-        Player.tail.next = new Node(x, y);
+        Player.tail.next = new Node(new Coord(x, y));
         Player.tail = Player.tail.next;
     },
 
@@ -114,7 +114,7 @@ const Player = {
                     currentDirection = "up";
                 }
                 break;
-                
+
             case "right":
                 if (current.next.coord.x > current.coord.x) {
                     currentDirection = "up";

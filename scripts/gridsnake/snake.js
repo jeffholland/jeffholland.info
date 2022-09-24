@@ -3,7 +3,7 @@ function update(progress) {
 
     spawnDots();
 
-    // detectCollisions();
+    detectCollisions();
 }
 
 function draw() {
@@ -12,6 +12,8 @@ function draw() {
     drawGrid(ctx);
 
     Player.draw(ctx);
+
+    drawDots(ctx);
 }
 
 let counter = 0;
