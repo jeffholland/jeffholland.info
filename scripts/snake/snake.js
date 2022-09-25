@@ -1,70 +1,58 @@
-//==============================================
-// game loop
-//==============================================
+import { getInputDirection } from "./input.js";
 
-function update(progress) {
+export const SNAKE_SPEED = 5;
+const snakeBody = [{x: 11, y: 11}];
+let newSegments = 0;
 
-    // Move player according to direction
-    Player.move(progress);
-    
-    // Spawn yellow dots randomly
-    spawn_dots();
+export function update() {
+    addSegments();
 
-    // Detect collisions
-    detect_collisions();
+    const inputDirection = getInputDirection();
+
+    for (let i = snakeBody.length - 2; i >= 0; i--) {
+        snakeBody[i + 1] = { ...snakeBody[i] };
+    }
+
+    snakeBody[0].x += inputDirection.x;
+    snakeBody[0].y += inputDirection.y;
 }
 
-function draw() {
-    ctx.clearRect(0, 0, width, height);
-
-    // Draw the player (snake)
-    Player.draw(ctx);
-
-    // Draw the yellow dots (snake food)
-    ctx.fillStyle = "yellow";
-    yellow_dots.forEach(dot => {
-        ctx.fillRect(dot.x, dot.y, yellow_dot_size, yellow_dot_size);
+export function draw(gameBoard) {
+    snakeBody.forEach(segment => {
+        const snakeElement = document.createElement('div');
+        snakeElement.style.gridRowStart = segment.y;
+        snakeElement.style.gridColumnStart = segment.x;
+        snakeElement.classList.add("snake");
+        gameBoard.appendChild(snakeElement);
     })
 }
 
-function loop(timestamp) {
-    var progress = timestamp - lastRender;
-
-    update(progress);
-    draw();
-
-    lastRender = timestamp;
-    window.requestAnimationFrame(loop);
+export function expandSnake(amount) {
+    newSegments += amount;
 }
 
-var lastRender = 0;
-window.requestAnimationFrame(loop);
+export function onSnake(position, { ignoreHead = false } = {}) {
+    return snakeBody.some((segment, index) => {
+        if (ignoreHead && index === 0) return false;
+        return equalPositions(segment, position);
+    })
+}
 
+export function getSnakeHead() {
+    return snakeBody[0];
+}
 
+export function snakeIntersection() {
+    return onSnake(snakeBody[0], { ignoreHead: true });
+}
 
+function equalPositions(pos1, pos2) {
+    return ( pos1.x === pos2.x && pos1.y === pos2.y );
+}
 
-//==============================================
-// keyboard input listener
-//==============================================
-
-window.addEventListener("keydown", function (event) {
-    if (event.defaultPrevented) {
-        return;
+function addSegments() {
+    for (let i = 0; i < newSegments; ++i) {
+        snakeBody.push({ ...snakeBody[snakeBody.length - 1] });
     }
-
-    // Modify position with arrow keys
-    switch (event.key) {
-        case "ArrowDown":
-            Player.change_direction("down");
-            break;
-        case "ArrowUp":
-            Player.change_direction("up");
-            break;
-        case "ArrowLeft":
-            Player.change_direction("left");
-            break;
-        case "ArrowRight":
-            Player.change_direction("right");
-            break;
-    }
-}, true);
+    newSegments = 0;
+}
