@@ -17,7 +17,6 @@ const Player = {
     tail: this.head,
 
     growSnake: function() {
-        console.log(Player);
 
         if (Player.tail == undefined) {
             Player.tail = Player.head;
@@ -57,7 +56,6 @@ const Player = {
         }
 
         // Rest of function only executes when progress_counter goes over threshold
-        
         Player.progress_counter = 0;
 
         let current = Player.head;

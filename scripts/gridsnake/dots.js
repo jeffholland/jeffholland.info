@@ -6,10 +6,10 @@
 let dots = [];
 
 // likelihood that they will spawn is one out of...
-const dotSpawnChance = 100;
+const dotSpawnChance = 20;
 
 // max num dots
-const maxDots = 5;
+const maxDots = 50;
 
 // spawn function
 function spawnDots() {
@@ -24,16 +24,7 @@ function spawnDots() {
 
         dots.push( new Coord(x, y) );
 
-        // if (debug) {
-        //     console.log("Spawned dot at " + x + ", " + y + " - grid values");
-        // }
-
         dots[dots.length - 1].convertToScreen();
-
-        // if (debug) {
-        //     console.log("Converted dot to " + dots[dots.length - 1].x 
-        //         + ", " + dots[dots.length - 1].y + " - screen values");
-        // }
     }
 }
 
@@ -52,10 +43,11 @@ function detectCollisions() {
         let current = Player.head;
 
         while (current != null) {
-            if (current.coord.x >= dots[i].x - gridSize
-                && current.coord.x <= dots[i].x + gridSize
-                && current.coord.y >= dots[i].y - gridSize
-                && current.coord.y <= dots[i].y + gridSize) {
+            if (dots[i] == undefined) {
+                    return;
+                }
+            if (current.coord.x == dots[i].x
+                && current.coord.y == dots[i].y) {
                     collision(i);
                 }
             current = current.next;
