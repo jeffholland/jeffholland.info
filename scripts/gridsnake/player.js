@@ -44,7 +44,8 @@ const Player = {
         Player.tail = Player.tail.next;
     },
 
-    progress_threshold: 250,
+    speed: 4,
+    progress_threshold: 500 / speed,
     progress_counter: 0,
 
     move: function(progress) {
