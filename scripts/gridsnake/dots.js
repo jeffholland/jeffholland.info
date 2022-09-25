@@ -58,6 +58,7 @@ function detectCollisions() {
                 && current.coord.y <= dots[i].y + gridSize) {
                     collision(i);
                 }
+            current = current.next;
         }
 
     }

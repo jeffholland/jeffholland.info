@@ -17,8 +17,14 @@ const Player = {
     tail: this.head,
 
     growSnake: function() {
-        let x = Player.tail.x;
-        let y = Player.tail.y;
+        console.log(Player);
+
+        if (Player.tail == undefined) {
+            Player.tail = Player.head;
+        }
+
+        let x = Player.tail.coord.x;
+        let y = Player.tail.coord.y;
 
         switch (Player.direction) {
             case "up":
@@ -36,10 +42,10 @@ const Player = {
         }
 
         Player.tail.next = new Node(new Coord(x, y));
-        Player.tail = Player.tail.next;
+        Player.tail = Node();
     },
 
-    progress_threshold: 500,
+    progress_threshold: 250,
     progress_counter: 0,
 
     move: function(progress) {
@@ -81,14 +87,14 @@ const Player = {
             }
 
             if (current.next != null) {
-                this.moveChangeDirection(currentDirection);
+                this.moveChangeDirection(current, currentDirection);
             }
 
             current = current.next;
         }
     },
 
-    moveChangeDirection: function(currentDirection) {
+    moveChangeDirection: function(current, currentDirection) {
         switch (currentDirection) {
 
             case "up":
