@@ -42,7 +42,7 @@ const Player = {
         }
 
         Player.tail.next = new Node(new Coord(x, y));
-        Player.tail = Node();
+        Player.tail = Player.tail.next;
     },
 
     progress_threshold: 250,
@@ -138,10 +138,6 @@ const Player = {
 
         while (current != null) {
             ctx.fillRect(current.coord.x, current.coord.y, gridSize, gridSize);
-
-            if (debug) {
-                console.log("Drawing node at " + current.coord.x + ", " + current.coord.y);
-            }
 
             current = current.next;
         }

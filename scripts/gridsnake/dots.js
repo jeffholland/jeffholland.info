@@ -24,16 +24,16 @@ function spawnDots() {
 
         dots.push( new Coord(x, y) );
 
-        if (debug) {
-            console.log("Spawned dot at " + x + ", " + y + " - grid values");
-        }
+        // if (debug) {
+        //     console.log("Spawned dot at " + x + ", " + y + " - grid values");
+        // }
 
         dots[dots.length - 1].convertToScreen();
 
-        if (debug) {
-            console.log("Converted dot to " + dots[dots.length - 1].x 
-                + ", " + dots[dots.length - 1].y + " - screen values");
-        }
+        // if (debug) {
+        //     console.log("Converted dot to " + dots[dots.length - 1].x 
+        //         + ", " + dots[dots.length - 1].y + " - screen values");
+        // }
     }
 }
 
@@ -69,8 +69,8 @@ function drawDots(ctx) {
 
     for (let i = 0; i < dots.length; ++i) {
         ctx.fillRect(dots[i].x, dots[i].y, gridSize, gridSize);
-        if (debug) {
-            console.log("Drew dot at " + dots[i].x + ", " + dots[i].y);
-        }
+        // if (debug) {
+        //     console.log("Drew dot at " + dots[i].x + ", " + dots[i].y);
+        // }
     }
 }
