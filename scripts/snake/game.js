@@ -2,9 +2,12 @@ import { update as updateSnake, draw as drawSnake, SNAKE_SPEED,
         getSnakeHead, snakeIntersection } from './snake.js'
 import { update as updateFood, draw as drawFood } from './food.js'
 import { outsideGrid } from './grid.js'
+import { getPaused } from './input.js';
+import { pause, unpause } from './pause.js'
 
 let lastRenderTime = 0;
 let gameOver = false;
+let gamePaused = false;
 const gameBoard = document.getElementById('game-board'); 
 
 function main(currentTime) {
@@ -30,9 +33,25 @@ function main(currentTime) {
 window.requestAnimationFrame(main);
 
 function update() {
+
+    if (gamePaused) {
+        if (!getPaused()) {
+            unpause();
+            gamePaused = false;
+        } else {
+            return;
+        }
+    }
+
     updateSnake();
     updateFood();
     checkForDeath();
+
+    // ESC TO PAUSE OR UNPAUSE
+    if (getPaused()) {
+        pause();
+        gamePaused = true;
+    }
 }
 
 function draw() {
