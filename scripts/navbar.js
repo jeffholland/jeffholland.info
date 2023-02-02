@@ -3,7 +3,7 @@ navbar.innerHTML = `
 <table class="navbar" cellspacing="10">
   <tr>
     <td>
-      <a class="nav-link" href="index.html">HOME</a>
+      <a class="nav-link" href="http://www.jeffholland.info">HOME</a>
     </td>
     <td>
       <a class="nav-link" href="projects.html">PROJECTS</a>
