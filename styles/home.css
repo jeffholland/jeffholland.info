@@ -86,6 +86,8 @@ h1 {
 h2 {
   font-size: 3rem;
   font-weight: bold;
+  font-family: "Aubergine";
+  color: #00DBE6
 }
 
 h3 {
@@ -100,9 +102,8 @@ div.bio {
   border-radius: 2rem;
   border-radius: 1rem;
   padding: 1rem;
-  /* margin: auto; */
+  margin: 1rem;
   width: 50%;
-  /* line-height: 1.2; */
   background-color: #040F0F;
 }
 
@@ -119,4 +120,15 @@ p {
 
 img {
   max-width: 600px;
+}
+
+.cover-art {
+  max-width: 250px;
+}
+
+.album-info {
+  display: grid;
+  align-items: center; 
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5px;
 }
