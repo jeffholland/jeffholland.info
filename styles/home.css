@@ -25,9 +25,9 @@
 }
 
 body {
-  background-image: url("../images/bg.jpg");
+  background-image: url("../images/bg2.jpg");
   background-color: #cccccc;
-  color: #00DBE6;
+  color: #C2FCF7;
   padding: 10spx;
   font-size: 18px;
   font-family: 'Playfair Display';
@@ -39,41 +39,41 @@ table.work-exp {
 }
 
 td.work-exp, th.work-exp {
-  border: 1px solid #00DBE6;
+  border: 1px solid #C2FCF7;
   padding: 8px;
 }
 
 a {
-  color: #00DBE6;
+  color: #85BDBF;
 }
 
 a.nav-link {
   font-size: 30px;
   font-family: 'Rampart One';
   text-decoration: none;
-  color: #710FD9;
+  color: #040F0F;
   background-color: #00DBE6;
   padding: 10px;
-  border: 2px solid #710FD9;
+  border: 2px solid #57737A;
   border-radius: 10px;
 }
 
 hr{
   height: 3px;
-  background-color: #00DBE6;
+  background-color: #C2FCF7;
   border: none;
 }
 
 h1 {
-    color: #710FD9;
+    color: #040F0F;
     font-size: 96px;
     font-family: 'Rampart One';
-    border: 5px solid #710FD9;
+    border: 5px solid #57737A;
     border-radius: 20px;
     padding: 40px;
     margin: auto;
     width: fit-content;
-    background-color: #00DBE6;
+    background-color: #C2FCF7;
 }
 
 h3 {
@@ -82,14 +82,14 @@ h3 {
 }
 
 div.bio {
-  border: 3px solid #00DBE6;
+  border: 3px solid #85BDBF;
   border-radius: 20px;
   border-radius: 10px;
   padding: 10px;
   margin: auto;
   width: 50%;
   line-height: 1.6;
-  background-color: #710FD9;
+  background-color: #040F0F;
 }
 
 p.bio-text {
@@ -98,35 +98,6 @@ p.bio-text {
   line-height: 1.5;
 }
 
-div.work-exp {
-  border: 3px solid #00DBE6;
-  border-radius: 20px;
-  border-radius: 10px;
+#navbar {
   padding: 10px;
-  margin: auto;
-  width: 50%;
-  line-height: 1.6;
-  background-color: #710FD9;
-}
-
-div.education {
-  border: 3px solid #00DBE6;
-  border-radius: 20px;
-  border-radius: 10px;
-  padding: 10px;
-  margin: auto;
-  width: 50%;
-  line-height: 1.6;
-  background-color: #710FD9;
-}
-
-div.contact-form-wrapper {
-  border: 3px solid #00DBE6;
-  border-radius: 20px;
-  border-radius: 10px;
-  padding: 10px;
-  margin: auto;
-  width: 50%;
-  line-height: 1.6;
-  background-color: #710FD9;
 }
