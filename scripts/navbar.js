@@ -6,7 +6,7 @@ navbar.innerHTML = `
       <a class="nav-link" href="http://www.jeffholland.info">HOME</a>
     </td>
     <td>
-      <a class="nav-link" href="projects.html">PROJECTS</a>
+      <a class="nav-link" href="code.html">CODE</a>
     </td>
     <td>
       <a class="nav-link" href="music.html">MUSIC</a>
