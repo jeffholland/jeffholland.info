@@ -4,6 +4,7 @@ const table = document.getElementById("gallery");
     Filenames need to be added manually here,
     because apparently you can't scan files in client-side JS.
 */
+
 const files = [
     "cat",
     "smile",
@@ -12,8 +13,6 @@ const files = [
     "sbwy-3",
     "sbwy-4c",
     "sbwy-8",
-    "e1",
-    "e2",
     "rbj",
     "c-c",
     "c-f",
@@ -28,31 +27,41 @@ const files = [
     "sunset4",
     "sunset5",
     "sunset6",
+    "sunset7",
+    "sunset8",
+    "sunset9"
 ];
 
-const tableWidth = 4;
+max = files.length
+random = Math.floor(Math.random() * max)
+chosen = files[random]
 
-let htmlString = "";
+frame = document.getElementById("image")
+frame.innerHTML = `<img src=\"images/gallery/${chosen}.png\">`
 
-for (let i = 0; i < files.length; i++) {
-    const filename = files[i]
+// const tableWidth = 4;
 
-    // Start of row
-    if (i % tableWidth == 0) {
-        htmlString += "<tr>"
-    }
+// let htmlString = "";
 
-    htmlString += `
-        <td>
-            <a href=\"images/gallery/${filename}.png\" target="_blank">
-                <img src=\"images/gallery/${filename}.png\">
-            </a>
-        </td>
-    `
-    // End of row
-    if (i % tableWidth == tableWidth - 1) {
-        htmlString += "</tr>"
-    }
-}
+// for (let i = 0; i < files.length; i++) {
+//     const filename = files[i]
 
-table.innerHTML = htmlString
+//     // Start of row
+//     if (i % tableWidth == 0) {
+//         htmlString += "<tr>"
+//     }
+
+//     htmlString += `
+//         <td>
+//             <a href=\"images/gallery/${filename}.png\" target="_blank">
+//                 <img src=\"images/gallery/${filename}.png\">
+//             </a>
+//         </td>
+//     `
+//     // End of row
+//     if (i % tableWidth == tableWidth - 1) {
+//         htmlString += "</tr>"
+//     }
+// }
+
+// table.innerHTML = htmlString
