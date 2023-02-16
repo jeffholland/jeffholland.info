@@ -12,7 +12,7 @@ navbar.innerHTML = `
       <a class="nav-link" href="music.html">MUSIC</a>
     </td>
     <td>
-      <a class="nav-link" href="gallery.html">GALLERY</a>
+      <a class="nav-link" href="art.html">ART</a>
     </td>
     <td>
       <a class="nav-link" href="contact.html">CONTACT</a>
