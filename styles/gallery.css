@@ -6,9 +6,17 @@ img {
 
 body {
     background-color: black;
-    color: white;
 }
 
 a {
-    color: white;
+    color: lightgray;
+}
+
+p {
+    font-size: 1rem;
+    color: lightgray;
+}
+
+.subtitle {
+    font-size: 0.8rem;
 }
