@@ -5,39 +5,14 @@ const table = document.getElementById("gallery");
     because apparently you can't scan files in client-side JS.
 */
 
-const files = [
-    "cat",
-    "smile",
-    "cat2",
-    "sbwy-1",
-    "sbwy-3",
-    "sbwy-4c",
-    "sbwy-8",
-    "rbj",
-    "c-c",
-    "c-f",
-    "etc1",
-    "etc2",
-    "me3",
-    "me4",
-    "me6",
-    "sunset1",
-    "sunset2",
-    "sunset3",
-    "sunset4",
-    "sunset5",
-    "sunset6",
-    "sunset7",
-    "sunset8",
-    "sunset9"
-];
+const files = ["bridge-1.jpeg","bridge-2.jpeg","bridge-3.jpeg","bridge-4.jpeg","bridge-5.jpeg","bridge-6.jpeg","bridge-7.jpeg","bridge-8.jpeg","bridge-9.jpeg","cat2.jpeg","etc1.jpeg","etc3.jpeg","me5.jpeg","me6.jpeg","sbwy-1.jpeg","sbwy-2.jpeg","sbwy-3.jpeg","sbwy-4b.jpeg","sbwy-4c.jpeg","sbwy-8.jpeg","sunset1.jpeg","sunset2.jpeg","sunset3.jpeg","sunset4.jpeg","sunset5.jpeg","sunset6.jpeg","sunset7.jpeg","sunset8.jpeg","sunset9.jpeg"];
 
 max = files.length
 random = Math.floor(Math.random() * max)
 chosen = files[random]
 
 frame = document.getElementById("image")
-frame.innerHTML = `<img src=\"images/gallery/${chosen}.png\">`
+frame.innerHTML = `<a href="images/gallery/${chosen}" target="_blank"><img src="images/gallery/${chosen}"/></a>`
 
 // const tableWidth = 4;
 
