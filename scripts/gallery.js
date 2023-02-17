@@ -1,5 +1,3 @@
-const table = document.getElementById("gallery");
-
 /* 
     Current steps to update the files list:
     1. cd images/gallery

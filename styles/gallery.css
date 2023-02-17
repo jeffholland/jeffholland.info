@@ -20,3 +20,16 @@ p {
 .subtitle {
     font-size: 0.8rem;
 }
+
+.tricolumn {
+  display: grid;
+  align-items: center; 
+  grid-template-columns: 0.1fr 2fr 0.1fr;
+  column-gap: 5px;
+  padding: 10px;
+}
+
+button {
+    max-width: min-content;
+    max-height: min-content;
+}
