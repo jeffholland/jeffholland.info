@@ -11,8 +11,42 @@ const files = [
 ]
 
 max = files.length
-random = Math.floor(Math.random() * max)
-chosen = files[random]
+index = Math.floor(Math.random() * max)
+chosen = files[index]
 
 frame = document.getElementById("image")
 frame.innerHTML = `<a href="images/gallery/${chosen}" target="_blank"><img src="images/gallery/${chosen}"/></a>`
+
+left = document.getElementById("left-button");
+right = document.getElementById("right-button");
+
+left.onclick = function() {
+    moveLeft()
+};
+right.onclick = function() {
+    moveRight()
+};
+
+const moveLeft = () => {
+    console.log("moveLeft")
+    if (index > 0) {
+        index -= 1;
+    }
+    else {
+        index = max - 1
+    }
+    chosen = files[index]
+    frame.innerHTML = `<a href="images/gallery/${chosen}" target="_blank"><img src="images/gallery/${chosen}"/></a>`
+};
+
+const moveRight = () => {
+    console.log("moveRight")
+    if (index < max - 1) {
+        index += 1;
+    }
+    else {
+        index = 0
+    }
+    chosen = files[index]
+    frame.innerHTML = `<a href="images/gallery/${chosen}" target="_blank"><img src="images/gallery/${chosen}"/></a>`
+};

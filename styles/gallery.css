@@ -1,7 +1,11 @@
 img {
-    max-width: 50%;
-    min-width: 50%;
+    max-width: 90%;
+    min-width: 90%;
     padding: 1rem;
+}
+
+#img {
+    min-height: 90%;
 }
 
 body {
@@ -30,6 +34,7 @@ p {
 }
 
 button {
-    max-width: min-content;
-    max-height: min-content;
+    max-width: 10px;
+    max-height: 10px;
+    padding: 1rem;
 }
