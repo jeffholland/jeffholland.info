@@ -38,3 +38,7 @@ button {
     max-height: 10px;
     padding: 1rem;
 }
+
+#info {
+    color: white;
+}
