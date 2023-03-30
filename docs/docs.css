@@ -1,0 +1,20 @@
+body {
+    background-color: purple;
+}
+
+.text {
+    font-size: 14;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.5;
+}
+
+h1 {
+    color: greenyellow;
+    font-size: 72px;
+    line-height: 1.2;
+}
+
+body {
+    color: white;
+    padding: 20px;
+}
