@@ -1,0 +1,38 @@
+@font-face {
+    font-family: 'Quicksand';
+    src: url('../fonts/quicksand/Quicksand-VariableFont_wght.ttf');
+}
+
+h1 {
+    padding-left: 2rem;
+    font-size: 7rem;
+    color: #DEDEE3;
+    font-weight: 100;
+}
+h2 {
+    padding-top: 1rem;
+    padding-left: 5rem;
+    font-size: 4rem;
+    color: #A9A7B4;
+}
+h3 {
+    padding-top: 1rem;
+    padding-left: 20rem;
+    font-size: 2.5rem;
+    color: #808CA6;
+}
+h4 {
+    padding-top: 2rem;
+    padding-left: 3rem;
+    font-size: 1.8rem;
+    color: #A2BCE0;
+}
+h5 {
+    padding-top: 2.5rem;
+    padding-left: 10rem;
+    font-size: 1.2rem;
+    color: #494C5A;
+}
+h1,h2,h3,h4,h5 {
+    font-family: "Quicksand";
+}
