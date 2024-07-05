@@ -84,8 +84,12 @@ img {
 }
 a {
     text-decoration: underline;
-    text-decoration-color: #EBEEE7;
+    text-decoration-color: #EBEEE7; 
     text-decoration-thickness: 1px;
+}
+a:hover {
+    text-decoration-color: #46879B;
+    text-decoration-style: dashed;
 }
 .poem-header {
     padding-left: 2rem;
