@@ -79,9 +79,6 @@ img {
     width: 200px;
     padding-left: 8rem;
 }
-.links-wrapper{
-    padding-left: 3rem;
-}
 a {
     text-decoration: underline;
     text-decoration-color: #EBEEE7; 
@@ -91,6 +88,16 @@ a:hover {
     text-decoration-color: #46879B;
     text-decoration-style: dashed;
 }
+
+/* music.html */
+.links-wrapper{
+    padding-left: 3rem;
+}
+.tiled-cover{
+    padding: 1rem;
+}
+
+/* poetry.html */
 .poem-header {
     padding-left: 2rem;
 }
