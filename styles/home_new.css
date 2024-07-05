@@ -60,13 +60,7 @@ img {
 .links-wrapper{
     padding-left: 3rem;
 }
-.links {
-    color: #808CA6;
-    text-decoration-color: #808CA6;
-}
-
-.alt-link {
-    display: block;
-    padding-left: 2rem;
-    color:#6E7387;
+a {
+    text-decoration: none;
+    color: #AFB5C5;
 }
