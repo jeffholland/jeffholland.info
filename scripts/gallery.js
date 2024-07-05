@@ -39,6 +39,15 @@ right.onclick = function() {
     moveRight()
 };
 
+/* arrow key functionality */
+document.addEventListener("keydown", (e) => {
+    if (e.code == 'ArrowRight') {
+        moveRight();
+    }
+    if (e.code == 'ArrowLeft') {
+        moveLeft();
+    }
+});
 
 /* Functions */
 

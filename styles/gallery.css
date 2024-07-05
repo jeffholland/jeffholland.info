@@ -1,11 +1,7 @@
 img {
-    max-width: 90%;
-    min-width: 90%;
+    max-width: 70%;
+    min-width: 70%;
     padding: 1rem;
-}
-
-#img {
-    min-height: 90%;
 }
 
 body {
