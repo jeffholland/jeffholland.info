@@ -88,6 +88,9 @@ a:hover {
     text-decoration-color: #46879B;
     text-decoration-style: dashed;
 }
+#home-button {
+    padding:20px;
+}
 
 /* music.html */
 .links-wrapper{
