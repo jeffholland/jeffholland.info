@@ -1,57 +1,79 @@
+/*
+Color palette 1
+bg: white
+h1: #DEDEE3
+h2: #808CA6
+h3: #A6B2CA
+h4: #A9A7B4
+h5: #6E7387
+h6/p/a: #AFB5C5
+
+Color palette 2
+bg: #040D10
+h1,h6,p,a: #EBEEE7
+h2: #F6F1D1
+h3: #A6C9C4
+h4: #73ACBF
+h5: #46879B
+
+*/
+
 @font-face {
     font-family: 'Quicksand';
     src: url('../fonts/quicksand/Quicksand-VariableFont_wght.ttf');
 }
 
-h1,h2,h3,h4,h5,h6,p {
+body {
+    background-color: #040D10;
+}
+
+h1,h2,h3,h4,h5,h6,p,a {
     font-family: "Quicksand";
+    color: #EBEEE7;
 }
 
 h1 {
     padding-left: 2rem;
     font-size: 7rem;
-    color: #DEDEE3;
     font-weight: 100;
 }
 h2 {
     padding-top: 1rem;
     padding-left: 6rem;
     font-size: 3rem;
-    color: #808CA6;
+    color: #F6F1D1;
     font-weight: 200;
 }
 h3 {
     padding-top: 1rem;
     padding-left: 20rem;
     font-size: 2.5rem;
-    color: #A6B2CA;
+    color: #A6C9C4;
     font-weight: 300;
 }
 h4 {
     padding-top: 2rem;
     padding-left: 4rem;
     font-size: 1.8rem;
-    color: #A9A7B4;
+    color: #73ACBF;
     font-weight: 500;
 }
 h5 {
     padding-top: 1.5rem;
     padding-left: 18rem;
     font-size: 1.4rem;
-    color: #6E7387;
+    color: #46879B;
     font-weight: 300;
 }
 h6{
     padding-top: 1.8rem;
     padding-left: 12rem;
-    color: #AFB5C5;
     font-weight: 600;
     font-size: 1rem;
 }
 p {
     padding-left: 2rem;
     font-weight: 400;
-    color: #AFB5C5;
 }
 img {
     width: 200px;
@@ -61,7 +83,14 @@ img {
     padding-left: 3rem;
 }
 a {
-    text-decoration: underline #808CA6;
-    text-decoration-thickness: 0.1rem;
-    color: #AFB5C5;
+    text-decoration: underline;
+    text-decoration-color: #EBEEE7;
+    text-decoration-thickness: 1px;
+}
+.poem-header {
+    padding-left: 2rem;
+}
+.poem {
+    margin-top: 2rem;
+    margin-bottom: 6rem;
 }
