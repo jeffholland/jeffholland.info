@@ -61,6 +61,7 @@ img {
     padding-left: 3rem;
 }
 a {
-    text-decoration: none;
+    text-decoration: underline #808CA6;
+    text-decoration-thickness: 0.1rem;
     color: #AFB5C5;
 }
