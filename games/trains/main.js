@@ -1,3 +1,41 @@
+/* borrowed code for math purposes */
+/**
+ * Adjusts a number to the specified digit.
+ *
+ * @param {"round" | "floor" | "ceil"} type The type of adjustment.
+ * @param {number} value The number.
+ * @param {number} exp The exponent (the 10 logarithm of the adjustment base).
+ * @returns {number} The adjusted value.
+ */
+function decimalAdjust(type, value, exp) {
+    type = String(type);
+    if (!["round", "floor", "ceil"].includes(type)) {
+      throw new TypeError(
+        "The type of decimal adjustment must be one of 'round', 'floor', or 'ceil'.",
+      );
+    }
+    exp = Number(exp);
+    value = Number(value);
+    if (exp % 1 !== 0 || Number.isNaN(value)) {
+      return NaN;
+    } else if (exp === 0) {
+      return Math[type](value);
+    }
+    const [magnitude, exponent = 0] = value.toString().split("e");
+    const adjustedValue = Math[type](`${magnitude}e${exponent - exp}`);
+    // Shift back
+    const [newMagnitude, newExponent = 0] = adjustedValue.toString().split("e");
+    return Number(`${newMagnitude}e${+newExponent + exp}`);
+}
+
+// Decimal round
+const round10 = (value, exp) => decimalAdjust("round", value, exp);
+// Decimal floor
+const floor10 = (value, exp) => decimalAdjust("floor", value, exp);
+// Decimal ceil
+const ceil10 = (value, exp) => decimalAdjust("ceil", value, exp);
+
+
 /* CLOCK.JS */
 
 // updateTime function runs on a loop
@@ -11,6 +49,14 @@ let timeMinutes = 0;
 let timeSeconds = 0;
 let timeSecondsFloat = 0.0; // seconds is always floored to an int
 // we don't need greater precision than that
+
+/* UPDATE: demand varies by time!
+   index is the time in hours (0 is midnight, 23 is 11pm)
+   value is the demand factor where 100 is the highest, 1 is the lowest.
+   roughly based on Google Maps data for Grand Central Station.
+*/
+
+const timeDemandMap = [8,4,2,1,4,10,15,25,45,60,70,75,80,85,90,93,95,95,92,83,70,45,30,15]
 
 const frequency = 5; // update time interval fixed to 5 ms
 let secondInterval = frequency / 1000; // seconds that pass each time updateTime is called
@@ -48,6 +94,17 @@ const updateTime = () => {
     checkForEvents();
     checkForRecurringEvents();
     setTime();
+
+    // update city demand (since it depends on the time of day now)
+    for (let i = 0; i < cities.length; i++) {
+        updateDemand(i);
+    }
+}
+
+const updateDemand = (i) => {
+    // encapsulate demand update to a function
+    cities[i]["demand"] = calculateDemand(cities[i]["ticketPrice"], cities[i]["population"])
+    cities[i]["demandElement"].innerHTML = floor10(cities[i]["demand"], -2);
 }
 
 /* clock speed */
@@ -449,11 +506,23 @@ leftColumnElement.innerHTML = text;
 
 // formula for calculating demand based on ticket price
 
-const calculateDemand = (ticketPrice) => {
+const calculateDemand = (ticketPrice, cityPop) => {
     // Demand is inversely proportional to ticket price
     // set at a standard of $1 per ticket = 100% demand
+    
+    // UPDATE: factor in city population
+    // New York's population is 200% demand at $1 per ticket,
+    // anything less than that gives less demand
 
-    return 100 / ticketPrice;
+    const newYorkPop = cities[0]["population"];
+    const popFactor = cityPop / newYorkPop;
+
+    // UPDATE: factor in time of day
+    demandFactor = timeDemandMap[timeHours] / 50;
+
+    const result = (100 / ticketPrice) * popFactor * demandFactor;
+
+    return result;
 }
 
 
@@ -479,22 +548,19 @@ for (let i = 0; i < cities.length; i++) {
     cities[i]["increaseTicketPriceElement"] = document.getElementById(cities[i]["name"] + "IncreaseTicketPrice");
     cities[i]["decreaseTicketPriceElement"] = document.getElementById(cities[i]["name"] + "DecreaseTicketPrice");
 
-    cities[i]["demand"] = calculateDemand(cities[i]["ticketPrice"]);
     cities[i]["demandElement"] = document.getElementById(cities[i]["name"] + "Demand");
-    cities[i]["demandElement"].innerHTML = Math.floor(cities[i]["demand"]);
+    updateDemand(i);
 
     cities[i]["increaseTicketPriceElement"].onclick = function() {
         cities[i]["ticketPrice"]++;
         cities[i]["ticketPriceElement"].innerHTML = cities[i]["ticketPrice"];
-        cities[i]["demand"] = calculateDemand(cities[i]["ticketPrice"]);
-        cities[i]["demandElement"].innerHTML = Math.floor(cities[i]["demand"]);
+        updateDemand(i);
     }
     cities[i]["decreaseTicketPriceElement"].onclick = function() {
         if (cities[i]["ticketPrice"] > 1) {
             cities[i]["ticketPrice"]--;
             cities[i]["ticketPriceElement"].innerHTML = cities[i]["ticketPrice"];
-            cities[i]["demand"] = calculateDemand(cities[i]["ticketPrice"]);
-            cities[i]["demandElement"].innerHTML = Math.floor(cities[i]["demand"]);
+            updateDemand(i);
         }
     }
 
@@ -565,38 +631,56 @@ addNextCityElement.onclick = function() {
 
 /* PASSENGERS.JS */
 
-// for debugging, so we don't overwhelmed with console.logs
-let debug = true;
-let debugInc = 0;
+const debug = true;
+let debugNow = false;
+let debugIncrement = 0;
 const debugLimit = 1000;
 
-const getPassengerIncrement = (sourceIndex, destIndex) => {
-    // todo - make it depend on source and dest city populations
-    // and other variables...
+const getPassengerIncrement = (sourceIndex, destIndex, departureHour) => {
     let increment = 0;
 
-    const sourcePopInc = cities[sourceIndex]["population"] / 100000000;
-    const destPopInc = cities[destIndex]["population"] / 100000000;
+    // increment increases at a rate affected by the demand and an element of randomness.
+    // demand has already been calculated based on city population, time of day, and ticket price.
+    let sourceDemandInc = (cities[sourceIndex]["demand"] / 1500) * Math.random();
+    let destDemandInc = (cities[destIndex]["demand"] / 10000) * Math.random();
 
-    increment += sourcePopInc * Math.random();
-    increment += destPopInc * Math.random();
-    increment *= (cities[sourceIndex]["demand"] / 500);
-
-    increment *= secondInterval;
+    // also at play, but less significant, is the hour of departure for the train
+    let departureTimeInc = (timeDemandMap[departureHour] / 100000) * Math.random();
 
     // cut off really small increments to 0
-    if (increment < 0.001) {
-        increment = 0.0;
+    if (sourceDemandInc < 0.001) {
+        sourceDemandInc = 0.0;
     }
+    if (destDemandInc < 0.001) {
+        destDemandInc = 0.0;
+    }
+    if (departureTimeInc < 0.0001) {
+        departureTimeInc = 0.0;
+    }
+     
+    // add it all together to get the increment
+    increment += sourceDemandInc;
+    increment += destDemandInc;
+    increment += departureTimeInc;
+
+    // make sure we're incrementing at the correct speed
+    increment *= secondInterval;
     
-    // for debugging, so we don't overwhelmed with console.logs
-    debugInc++;
-    if (debug == true && debugInc >= debugLimit) {
-        console.log(`sourcePopInc: ${sourcePopInc * Math.random()}`);
-        console.log(`destPopInc: ${destPopInc * Math.random()}`);
-        console.log(`demand: ${cities[sourceIndex]["demand"]}`);
+    // debug code
+    debugIncrement++;
+    if (debugIncrement >= debugLimit){
+        debugNow = true;
+    } else {
+        debugNow = false;
+    }
+
+    if (debug && debugNow) {
+        console.log(`sourceDemandInc: ${sourceDemandInc}`);
+        console.log(`destDemandInc: ${destDemandInc}`);
+        console.log(`departureTimeInc: ${departureTimeInc}`);
         console.log(`increment: ${increment}`);
-        debugInc = 0;
+        console.log(`secondInterval: ${secondInterval}`)
+        debugIncrement = 0;
     }
 
     return increment;
@@ -833,14 +917,21 @@ const sendTrain = (sourceIndex, destIndex) => {
             "execute": function() {
                 // if train is at capacity, this function does nothing
                 if (passengers < trainCapacity) {
+
                     // the function called below determines how much closer we are to a 
-                    // passenger "buying a ticket" for this train
-                    passengersFloat += getPassengerIncrement(sourceIndex, destIndex);
+                    // passenger buying a ticket for this train.
+                    // factors include source and dest city populations as well as hour of departure time.
+
+                    passengersFloat += getPassengerIncrement(sourceIndex, destIndex, departureTime[1]);
                     const passengerChange = passengersFloat - passengers;
+                    if (debugNow) {
+                        console.log(`passengers float: ${passengersFloat}`);
+                    }
     
                     // if we're adding a passenger,
                     // then they've "bought a ticket", so we get money
                     if (passengerChange >= 1) {
+                        console.log(`Purchased 1 ticket at ${timeHours}:${timeMinutes}`)
                         passengers = Math.floor(passengersFloat);
                         passengersElement.innerHTML = passengers;
     
