@@ -108,3 +108,9 @@ a:hover {
     margin-top: 2rem;
     margin-bottom: 6rem;
 }
+
+/* art.html */
+.gif {
+    width: 80%;
+    margin: auto;
+}
