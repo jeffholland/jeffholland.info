@@ -25,10 +25,15 @@ h5: #46879B
 
 body {
     background-color: rgba(1, 15, 42, 0.9);
-    background-image: url('../images/gallery/sunset6.jpeg');
+    background-image: url('../images/gallery/sunset6.jpeg?v=2');
     background-blend-mode: darken;
     background-size: 100%;
 }
+
+body {
+    background-image: url('../images/gallery/sunset6.jpeg?v=force') !important;
+}
+
 
 h1,h2,h3,h4,h5,h6,p,a {
     font-family: "Quicksand";
@@ -101,6 +106,10 @@ a:hover {
 }
 .tiled-cover{
     padding: 1rem;
+}
+iframe {
+    padding: 10px;
+    display: block;
 }
 
 /* poetry.html */
